@@ -392,11 +392,13 @@ class Runner:
         self.last_printed = ""
         self.stdin_buf = b""
         self.stop = False
+        # Checked on each poll and open attempt, not on every loop pass.
+        self.dongle = dongle_present()
 
     # -- output ------------------------------------------------------------
     def status(self):
         s = {
-            "dongle": dongle_present(),
+            "dongle": self.dongle,
             "connected": self.port is not None and bool(self.state),
             "port": self.port.path if self.port else "",
             "serial": self.serial,
@@ -427,9 +429,10 @@ class Runner:
         if now - self.last_open_try < RETRY_SECONDS:
             return
         self.last_open_try = now
+        self.dongle = dongle_present()
         path = find_port()
         if not path:
-            self.error = "" if not dongle_present() else "The dongle's settings port is missing."
+            self.error = "" if not self.dongle else "The dongle's settings port is missing."
             return
         try:
             self.port = Port(path)
@@ -453,6 +456,7 @@ class Runner:
         return FAST_POLL_SECONDS if self.fast else POLL_SECONDS
 
     def poll(self):
+        self.dongle = dongle_present()
         try:
             self.state = read_state(self.port)
             self.misses = 0
