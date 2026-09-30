@@ -61,7 +61,7 @@ The headset answers with `04 0e 1c 01 f3 ff <status> <echo...>`.
 | Brightness | `40 8e 00 00 <0-255>` |
 | Color | `40 8c 00 00 08 01 <R> <G> <B>` |
 
-Reads (`20`): `21` serial number (ASCII), `24` `01 0f <link> <battery %>`,
+Reads (`20`): `21` serial number (ASCII), `24` `<flags> 0f <link> <battery %>` (flags bit `0x04` = charging),
 `25` sidetone, `26` power saving. The `40` group is write-only.
 
 Mic volume is standard USB audio. Plugging or unplugging the charger can stop

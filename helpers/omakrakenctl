@@ -335,6 +335,8 @@ def read_state(port):
     power = port.read_value(0x26)
     return {
         "battery": int(battery_reply[3]),
+        # Bit 0x04 of the first byte is set while the headset charges.
+        "charging": bool(battery_reply[0] & 0x04),
         "signal": int(battery_reply[2]),
         "sidetone": bool(sidetone[0]),
         "sidetoneLevel": int(min(4, sidetone[1])),

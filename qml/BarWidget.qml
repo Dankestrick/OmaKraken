@@ -33,7 +33,7 @@ Panel {
     if (!kraken) return "Starting"
     if (!dongle) return "Dongle not found"
     if (!connected) return "Headset not answering"
-    return kraken.battery >= 0 ? kraken.battery + "%" : "Connected"
+    return kraken.batteryText
   }
 
   function set(key, value) {

@@ -70,5 +70,7 @@ function hueHex(h) {
 function batteryText(status) {
   if (!status || !status.dongle) return "Dongle not found"
   if (!status.connected) return "Headset not answering"
-  return status.battery !== undefined ? status.battery + "%" : "Battery unknown"
+  var text = status.battery !== undefined ? status.battery + "%" : "Battery unknown"
+  if (status.charging) text += " · Charging"
+  return text
 }

@@ -9,7 +9,7 @@ Omarchy theme.
 
 ## What it does
 
-A headset icon on the bar shows the battery on hover. Click it for a dropdown
+A headset icon on the bar shows the battery and charging state on hover. Click it for a dropdown
 with five tabs:
 
 | Tab | Settings |
@@ -18,7 +18,7 @@ with five tabs:
 | Sound | Sidetone on or off and its level (1-5), mic volume |
 | Haptics | HyperSense haptics on or off, Low / Medium / High |
 | Power | Power saving on or off, and after how many minutes (15-60) |
-| Device | Battery, serial number, dongle |
+| Device | Battery and charging, serial number, dongle |
 
 You get a notification when the battery drops to 20% and again at 10%.
 
@@ -106,7 +106,7 @@ OmaKraken runs as a normal Omarchy plugin, with your user's permissions.
 
 | Action | What happens |
 | --- | --- |
-| Hover the bar icon | Battery |
+| Hover the bar icon | Battery and charging |
 | Left-click the bar icon | Open or close the dropdown |
 | Right-click the bar icon | Read the headset again |
 | `←` / `→` in the dropdown | Switch tabs |

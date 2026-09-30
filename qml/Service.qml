@@ -24,6 +24,7 @@ Item {
   readonly property bool dongle: !!(status && status.dongle)
   readonly property bool connected: !!(status && status.connected)
   readonly property int battery: connected && status.battery !== undefined ? Number(status.battery) : -1
+  readonly property bool charging: connected && !!status.charging
   readonly property string batteryText: Api.batteryText(status)
   readonly property var saved: status && status.settings ? status.settings : ({})
 
@@ -81,7 +82,7 @@ Item {
 
   function checkBattery() {
     if (battery < 0) return
-    if (battery > lowBattery + 5) { alertedLevel = 101; return }
+    if (charging || battery > lowBattery + 5) { alertedLevel = 101; return }
     if (battery <= criticalBattery && alertedLevel > criticalBattery) {
       alertedLevel = criticalBattery
       Quickshell.execDetached(["timeout", "10", "notify-send", "-u", "critical", "-a", "OmaKraken",
