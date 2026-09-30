@@ -491,7 +491,19 @@ Panel {
     property var display: null
     signal picked(int value)
     readonly property bool usable: active && (!needsHeadset || root.connected)
-    readonly property int shown: Math.round(slider.dragging ? slider.liveValue : level)
+    // The stock slider jumps back to `value` on release and waits for the
+    // owner to report the new one. The headset confirms a change a moment
+    // later, so hold the released value until it does (or 3 s pass).
+    property int pending: -1
+    readonly property int current: pending >= 0 ? pending : level
+    readonly property int shown: Math.round(slider.dragging ? slider.liveValue : current)
+    onLevelChanged: pending = -1
+
+    Timer {
+      id: settle
+      interval: 3000
+      onTriggered: sliderRow.pending = -1
+    }
     width: parent ? parent.width : 0
     implicitHeight: sliderLabel.implicitHeight + Style.space(4) + slider.implicitHeight
     opacity: usable ? 1 : 0.5
@@ -521,8 +533,12 @@ Panel {
       integer: true
       tickCount: sliderRow.ticks
       enabled: sliderRow.usable
-      value: sliderRow.level
-      onReleased: function(v) { sliderRow.picked(Math.round(v)) }
+      value: sliderRow.current
+      onReleased: function(v) {
+        sliderRow.pending = Math.round(v)
+        settle.restart()
+        sliderRow.picked(Math.round(v))
+      }
     }
 
     Text {
