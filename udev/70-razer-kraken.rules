@@ -1,0 +1,13 @@
+# OmaKraken: let the logged-in user talk to the Razer Kraken V3 Pro's wireless
+# dongle (USB 1532:052c) without root.
+#
+# - Matches only that dongle's serial (tty) port, where its settings channel
+#   is. No other device is affected.
+# - TAG+="uaccess" grants access to the user at the active local seat only,
+#   the same way Linux handles game controllers. It does not open the device
+#   to other users (no MODE="0666").
+# - ID_MM_DEVICE_IGNORE keeps ModemManager from probing the port as a modem.
+#
+# Install:  sudo install -m 0644 70-razer-kraken.rules /etc/udev/rules.d/
+# Remove:   sudo rm /etc/udev/rules.d/70-razer-kraken.rules
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1532", ATTRS{idProduct}=="052c", TAG+="uaccess", ENV{ID_MM_DEVICE_IGNORE}="1"

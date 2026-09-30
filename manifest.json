@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.dankestrick.omakraken",
+  "name": "OmaKraken",
+  "version": "0.1.0",
+  "author": "Dankestrick",
+  "license": "MIT",
+  "description": "Razer Kraken V3 Pro controls for the Omarchy bar: battery, lighting and effects, sidetone, mic volume, haptics and power saving, themed for Omarchy.",
+  "dependencies": [
+    {
+      "name": "python",
+      "package": "python",
+      "why": "Runs the helper that talks to the headset's dongle"
+    },
+    {
+      "name": "notify-send",
+      "package": "libnotify",
+      "why": "Low battery alerts"
+    }
+  ],
+  "kinds": [
+    "service",
+    "bar-widget"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "service": "qml/Service.qml",
+    "barWidget": "qml/BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Kraken Headset",
+    "description": "Battery, lighting, sidetone, mic volume, haptics and power saving for the Razer Kraken V3 Pro.",
+    "category": "System",
+    "aliases": [
+      "headset",
+      "headphones",
+      "kraken",
+      "razer",
+      "sidetone"
+    ],
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
