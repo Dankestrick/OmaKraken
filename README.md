@@ -20,6 +20,8 @@ with five tabs:
 | Power | Power saving on or off, and after how many minutes (15-60) |
 | Device | Battery and charging, serial number, dongle |
 
+![Sound, Haptics, Power and Device tabs](docs/tabs.png)
+
 You get a notification when the battery drops to 20% and again at 10%.
 
 The headset has no lighting effects of its own; Razer's app streams the
