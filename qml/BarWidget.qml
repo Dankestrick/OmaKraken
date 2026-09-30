@@ -28,6 +28,10 @@ Panel {
 
   readonly property string effect: saved.effect || "static"
   readonly property bool lightingOn: saved.lighting !== false
+  // The headset turns its lights off while charging, whatever is sent.
+  readonly property bool charging: !!(kraken && kraken.charging)
+  readonly property bool lightingEditable: connected && !charging
+  readonly property bool lightsLive: lightingEditable && lightingOn
 
   readonly property string statusLine: {
     if (!kraken) return "Starting"
@@ -178,9 +182,9 @@ Panel {
           Toggle {
             width: parent.width
             label: "Lighting"
-            description: "The lights stay off while the headset charges."
+            description: root.charging ? "The headset turns its lights off while charging." : ""
             checked: root.lightingOn
-            enabled: root.connected
+            enabled: root.lightingEditable
             foreground: root.fg
             fontFamily: root.fontFamily
             onClicked: root.set("lighting", !root.lightingOn)
@@ -192,7 +196,7 @@ Panel {
               id: effectMenu
               width: Style.space(190)
               showLabel: false
-              enabled: root.connected && root.lightingOn
+              enabled: root.lightsLive
               options: Api.EFFECTS
               value: root.effect
               fontFamily: root.fontFamily
@@ -206,7 +210,7 @@ Panel {
             maximum: 100
             level: root.saved.brightness !== undefined ? root.saved.brightness : 100
             suffix: "%"
-            active: root.lightingOn
+            active: root.lightsLive
             onPicked: function(v) { root.set("brightness", v) }
           }
 
@@ -217,7 +221,7 @@ Panel {
             maximum: 10
             ticks: 10
             level: root.saved.speed || 5
-            active: root.lightingOn
+            active: root.lightsLive
             onPicked: function(v) { root.set("speed", v) }
           }
 
@@ -233,7 +237,7 @@ Panel {
               width: parent.width
               height: Style.space(22)
               radius: Style.cornerRadius
-              opacity: root.connected && root.lightingOn ? 1 : 0.5
+              opacity: root.lightsLive ? 1 : 0.5
               gradient: Gradient {
                 orientation: Gradient.Horizontal
                 GradientStop { position: 0.0; color: "#ff0000" }
@@ -247,7 +251,7 @@ Panel {
 
               MouseArea {
                 anchors.fill: parent
-                enabled: root.connected && root.lightingOn
+                enabled: root.lightsLive
                 cursorShape: Qt.PointingHandCursor
                 onClicked: function(m) {
                   root.set("color", Api.hueHex(Math.max(0, Math.min(0.9999, m.x / width))))
@@ -268,13 +272,13 @@ Panel {
                   height: Style.space(24)
                   radius: Style.cornerRadius
                   color: modelData
-                  opacity: root.connected && root.lightingOn ? 1 : 0.5
+                  opacity: root.lightsLive ? 1 : 0.5
                   border.width: picked ? 2 : 1
                   border.color: picked ? root.fg : Util.alpha(root.fg, 0.2)
 
                   MouseArea {
                     anchors.fill: parent
-                    enabled: root.connected && root.lightingOn
+                    enabled: root.lightsLive
                     cursorShape: Qt.PointingHandCursor
                     onClicked: root.set("color", modelData)
                   }

@@ -25,7 +25,8 @@ You get a notification when the battery drops to 20% and again at 10%.
 The headset has no lighting effects of its own; Razer's app streams the
 colors. OmaKraken does the same, so effects run while the Omarchy shell is
 running. When nothing drives the lights, the headset falls back to its own
-slow color cycle. The lights stay off while the headset charges.
+slow color cycle. The headset turns its lights off while it charges, so the
+Lighting tab greys out then.
 
 Equalizer, bass boost, sound normalization, voice clarity and THX Spatial
 Audio are effects inside Razer's Windows app. The headset has no setting for
