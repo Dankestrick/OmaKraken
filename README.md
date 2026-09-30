@@ -81,8 +81,7 @@ OmaKraken runs as a normal Omarchy plugin, with your user's permissions.
 
 - **One root step, at install.** Step 2 copies one udev rule into
   `/etc/udev/rules.d/`. After that, nothing needs root. At runtime,
-  OmaKraken does not use sudo or pkexec. It installs no services and changes
-  no sudoers rules.
+  OmaKraken does not use sudo or pkexec. It installs no services.
 - **What the rule allows.** It matches only the Kraken dongle's serial port
   (USB `1532:052c`) and tags it `uaccess`, which gives the user at the active
   local session read and write access, the same way Linux handles game

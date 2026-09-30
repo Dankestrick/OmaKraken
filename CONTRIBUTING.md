@@ -20,9 +20,9 @@ replaces a folder it created itself and that still holds exactly the files it
 installed (a marker lists each file with its SHA-256). A checkout from
 `omarchy plugin add`, or a folder with your own files in it, is left alone.
 
+From a checkout of this repository:
+
 ```bash
-git clone https://github.com/Dankestrick/OmaKraken.git
-cd OmaKraken
 scripts/install.sh
 omarchy-shell shell rescanPlugins
 omarchy plugin enable io.github.dankestrick.omakraken
