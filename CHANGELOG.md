@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+- New look: a faint OMAKRAKEN, in the font of the Omarchy logo, repeats in
+  diagonal rows behind the dropdown. It uses the theme's accent color, so it
+  changes with the theme.
+
 ## 0.1.0
 
 First version.

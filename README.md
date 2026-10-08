@@ -10,7 +10,8 @@ Omarchy theme.
 ## What it does
 
 A headset icon on the bar shows the battery and charging state on hover. Click it for a dropdown
-with five tabs:
+with five tabs. Behind them, a faint OMAKRAKEN in the font of the Omarchy logo
+repeats in diagonal rows, in the theme's accent color.
 
 | Tab | Settings |
 | --- | --- |

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.dankestrick.omakraken",
   "name": "OmaKraken",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Dankestrick",
   "license": "MIT",
   "description": "Razer Kraken V3 Pro controls for the Omarchy bar: battery, lighting and effects, sidetone, mic volume, haptics and power saving, themed for Omarchy.",

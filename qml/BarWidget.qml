@@ -84,6 +84,14 @@ Panel {
         root.tab = root.tabs[(i + root.tabs.length) % root.tabs.length]
       }
 
+      // Faint OMAKRAKEN behind the dropdown, out to its border.
+      NameBackdrop {
+        anchors.fill: column
+        anchors.margins: -(panel.padding - Style.space(2))
+        copyWidth: 0.55
+        strength: 0.12
+      }
+
       Column {
         id: column
         anchors.fill: parent
